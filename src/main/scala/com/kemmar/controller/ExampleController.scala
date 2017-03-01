@@ -11,13 +11,14 @@ case class Error(error: String)
 class ExampleController extends ScalatraServlet with ControllerBase {
   val service = new Endpoint()
 
-  get("/fish/test/?") {
+  get("/catalogue/products/?") {
     complete {
       for {
-        in1 <- service.country
+        in1 <- service.getCatalogueCBS
       } yield in1
     }
   }
+
 
   get("""^/fish/([0-9]{1,24})/?$""".r) {
     complete {

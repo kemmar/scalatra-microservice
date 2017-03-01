@@ -10,6 +10,9 @@ trait ErrorHandler extends ServletBase {
 
   errorHandler = {
     case t => {
+
+      println(t)
+
       halt(422, Error(t.toString))
     }
   }

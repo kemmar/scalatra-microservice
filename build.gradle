@@ -1,8 +1,25 @@
 apply plugin: 'scala'
 apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+apply plugin: 'maven'
+apply plugin: 'war'
+apply plugin: 'nimbusplugin'
+apply plugin: 'com.bmuschko.nexus'
 
-repositories {
-    mavenCentral()
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            credentials {
+                username nexusUsername
+                password nexusPassword
+            }
+            url "https://nexus.nowtv.bskyb.com/repository/payments_maven/releases/"
+        }
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1',
+                  'njp:nimbus-plugin:2.0.8'
+    }
 }
 
 gretty {
@@ -19,5 +36,6 @@ dependencies {
             'org.scalatra:scalatra_2.11:2.5.0',
             'org.scalatra:scalatra-json_2.11:2.5.0',
             "org.json4s:json4s-jackson_2.11:3.5.0",
-            'net.databinder.dispatch:dispatch-core_2.11:0.11.2'
+            'net.databinder.dispatch:dispatch-core_2.11:0.11.2',
+            'com.github.cb372:scalacache-guava_2.11:0.9.3'
 }

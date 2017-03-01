@@ -6,7 +6,7 @@ import org.scalatra._
 class ScalatraBootstrap extends LifeCycle {
 
   override def init(context: ServletContext) {
-    context.mount(new ExampleController, "/hello/*")
+    context.mount(new ExampleController, "/*")
 //    context.mount(new ExampleController2, "/*")
   }
 }
